@@ -1,18 +1,23 @@
+import os
 import time
 import datetime
 import psycopg2
 import psycopg2.extras
+
+from dotenv import load_dotenv, find_dotenv
 
 from scally_client import ZMQClient
 
 from utils import get_user_status
 from sending_alerts import send_telegram_message
 
-DB_NAME = 'user_activity'
-DB_USER = 'user_activity'
-DB_PASSWORD = '1213'
-DB_HOST = 'localhost'
-DB_PORT = '5432'
+load_dotenv(find_dotenv())
+
+DB_NAME = os.getenv('NAME')
+DB_USER = os.getenv('USER')
+DB_PASSWORD = os.getenv('PASSWORD')
+DB_HOST = os.getenv('HOST')
+DB_PORT = os.getenv('PORT')
 
 def get_actions_with_payments():
     """
